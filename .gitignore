@@ -1,0 +1,12 @@
+# Build Artifacts
+
+.gradle/
+build/
+target/
+bin/
+
+# Eclipse Project Files
+
+.classpath
+.project
+.settings/
