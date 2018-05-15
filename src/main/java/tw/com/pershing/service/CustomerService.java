@@ -36,6 +36,11 @@ public class CustomerService {
         cust.setPassword(passwordEncoder.encode(customer.getPassword()));
         cust.setEmail(customer.getEmail());
         cust.setMobile(customer.getMobile());
+        cust.setBirthdate(customer.getBirthdate());
+        cust.setAge(customer.getAge());
+        cust.setOccupation(customer.getOccupation());
+        cust.setMarriage(customer.getMarriage());
+        cust.setNumbersofchildren(customer.getNumbersofchildren());
         return repository.saveUser(cust);
     }
 	

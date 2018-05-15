@@ -1,5 +1,7 @@
 package tw.com.pershing.domain;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +18,11 @@ public class Customer {
 	private String mobile;
 	private String email;
 	private String password;
+	private Date birthdate;
+	private byte age;
+	private String occupation;
+	private String marriage;
+	private byte numbersofchildren;
 
 	public int getCustomer_id() {
 		return customer_id;
@@ -63,4 +70,44 @@ public class Customer {
         builder.append("Customer [username=").append(username).append(", mobile=").append(mobile).append(", password=").append(password).append(", email=").append(email).append("]");
         return builder.toString();
     }
+
+	public Date getBirthdate() {
+		return birthdate;
+	}
+
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
+	}
+
+	public byte getAge() {
+		return age;
+	}
+
+	public void setAge(byte age) {
+		this.age = age;
+	}
+
+	public String getOccupation() {
+		return occupation;
+	}
+
+	public void setOccupation(String occupation) {
+		this.occupation = occupation;
+	}
+
+	public String getMarriage() {
+		return marriage;
+	}
+
+	public void setMarriage(String marriage) {
+		this.marriage = marriage;
+	}
+
+	public byte getNumbersofchildren() {
+		return numbersofchildren;
+	}
+
+	public void setNumbersofchildren(byte numbersofchildren) {
+		this.numbersofchildren = numbersofchildren;
+	}
 }
