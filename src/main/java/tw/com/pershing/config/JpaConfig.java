@@ -1,5 +1,7 @@
 package tw.com.pershing.config;
 
+import java.util.Properties;
+
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
@@ -28,6 +30,11 @@ public class JpaConfig {
 		ds.setUrl("jdbc:mysql://localhost:3306/smartshop");
 		ds.setUsername("root");
 		ds.setPassword("mysql");
+		Properties properties = new Properties();
+		properties.setProperty("useSSL", "false");
+		properties.setProperty("useUnicode", "true");
+		properties.setProperty("characterEncoding", "UTF-8");
+		ds.setConnectionProperties(properties);
 		return ds;
 	}
 
