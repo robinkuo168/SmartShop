@@ -35,7 +35,15 @@ public class CustomerRepo {
 		List<Customer> customerList = query.getResultList();
 		return customerList;
 	}
-	
+
+	public List<Customer> findCustomerByEmailorUsername(String email) {
+		TypedQuery<Customer> query = emf.createEntityManager()
+				.createQuery("SELECT u FROM Customer u where email=:email or username=:email", Customer.class)
+				.setParameter("email", email);
+		List<Customer> customerList = query.getResultList();
+		return customerList;
+	}
+
 	public Customer findCustomerWithPassword(Customer customer) {
 		TypedQuery<Customer> query = emf.createEntityManager()
 				.createQuery("SELECT u FROM Customer u where email=:email", Customer.class)
