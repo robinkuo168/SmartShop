@@ -2,34 +2,45 @@ package tw.com.pershing.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "tb_customer")
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int customer_id;
+	@Column(name="customer_id")
+	private int customerId;
 	private String username;
 	private String mobile;
 	private String email;
 	private String password;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthdate;
 	private byte age;
 	private String occupation;
 	private String marriage;
 	private byte numbersofchildren;
+	@Column(name="create_at")
+	private Date createAt;
+	@Column(name="last_request_at")
+	private Date lastRequestAt;
+	@Column(name="update_at")
+	private Date updateAt;
 
-	public int getCustomer_id() {
-		return customer_id;
+	public int getCustomerId() {
+		return customerId;
 	}
 
-	public void setCustomer_id(int customer_id) {
-		this.customer_id = customer_id;
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 
 	public String getUsername() {
@@ -109,5 +120,29 @@ public class Customer {
 
 	public void setNumbersofchildren(byte numbersofchildren) {
 		this.numbersofchildren = numbersofchildren;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+
+	public Date getLastRequestAt() {
+		return lastRequestAt;
+	}
+
+	public void setLastRequestAt(Date lastRequestAt) {
+		this.lastRequestAt = lastRequestAt;
+	}
+
+	public Date getUpdateAt() {
+		return updateAt;
+	}
+
+	public void setUpdateAt(Date updateAt) {
+		this.updateAt = updateAt;
 	}
 }

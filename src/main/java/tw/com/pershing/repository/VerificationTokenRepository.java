@@ -27,8 +27,8 @@ public class VerificationTokenRepository {
 	
 	public VerificationToken findByCustomer(Customer customer){
 		TypedQuery<VerificationToken> query = emf.createEntityManager()
-				.createQuery("SELECT u FROM VerificationToken u where u.customer.customer_id=:id", VerificationToken.class)
-				.setParameter("id", customer.getCustomer_id());
+				.createQuery("SELECT u FROM VerificationToken u where u.customer.customerId=:id", VerificationToken.class)
+				.setParameter("id", customer.getCustomerId());
 		return query.getResultList().get(0);
 	}
 	

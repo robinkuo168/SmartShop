@@ -1,5 +1,6 @@
 package tw.com.pershing.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,9 @@ public class CustomerService {
         cust.setOccupation(customer.getOccupation());
         cust.setMarriage(customer.getMarriage());
         cust.setNumbersofchildren(customer.getNumbersofchildren());
+        cust.setCreateAt(new Date());
+        cust.setLastRequestAt(new Date());
+        cust.setUpdateAt(new Date());
         return repository.saveUser(cust);
     }
 	
