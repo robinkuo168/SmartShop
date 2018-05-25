@@ -19,12 +19,12 @@ public class CustomerRepo {
 	@PersistenceUnit
 	private EntityManagerFactory emf;
 
-	public List<Customer> findCustomerByUsername(String user) {
+	public List<Customer> findCustomerByAccountId(String accountId) {
 		TypedQuery<Customer> query = emf.createEntityManager()
-				.createQuery("SELECT u FROM Customer u where username=:user", Customer.class)
-				.setParameter("user", user);
+				.createQuery("SELECT u FROM Customer u where accountId=:accountId", Customer.class)
+				.setParameter("accountId", accountId);
 		List<Customer> userList = query.getResultList();
-		System.out.println("findUserByUsername length:" + userList.size());
+		System.out.println("findUserByAccountId length:" + userList.size());
 		return userList;
 	}
 	
@@ -36,9 +36,9 @@ public class CustomerRepo {
 		return customerList;
 	}
 
-	public List<Customer> findCustomerByEmailorUsername(String email) {
+	public List<Customer> findCustomerByEmailOrAccountId(String email) {
 		TypedQuery<Customer> query = emf.createEntityManager()
-				.createQuery("SELECT u FROM Customer u where email=:email or username=:email", Customer.class)
+				.createQuery("SELECT u FROM Customer u where email=:email or accountId=:email", Customer.class)
 				.setParameter("email", email);
 		List<Customer> customerList = query.getResultList();
 		return customerList;
@@ -90,10 +90,11 @@ public class CustomerRepo {
 		customer.setEmail("a@a.com");
 		customer.setMobile("0912345678");
 		customer.setUsername("Melvin");
+		customer.setAccountId("melvin");
 		customer.setPassword("000000");
 		cm.saveUser(customer);
 
-		cm.findCustomerByUsername("Melvin");
+		cm.findCustomerByAccountId("Melvin");
 
 		cm.deleteUser(customer);
 	}

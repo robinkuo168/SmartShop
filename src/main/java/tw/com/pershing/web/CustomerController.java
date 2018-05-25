@@ -30,7 +30,7 @@ public class CustomerController {
 
 	@RequestMapping(value = "/customer")
 	public List<Customer> customerList(@RequestParam(value = "name") String username) {
-		return customerMananger.findCustomerByUsername(username);
+		return customerMananger.findCustomerByAccountId(username);
 	}
 
 	@RequestMapping(value = "/save")

@@ -18,6 +18,8 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="customer_id")
 	private int customerId;
+	@Column(name="account_id")
+	private String accountId;
 	private String username;
 	private String mobile;
 	private String email;
@@ -144,5 +146,13 @@ public class Customer {
 
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
+	}
+
+	public String getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
 	}
 }

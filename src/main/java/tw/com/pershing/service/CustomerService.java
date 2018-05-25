@@ -29,12 +29,13 @@ public class CustomerService {
 	
 	public Customer registerNewUserAccount(final Customer customer) {
         if (emailExist(customer.getEmail())) {
-            throw new UserAlreadyExistException("There is an account with that email adress: " + customer.getEmail());
-        } else if (usernameExist(customer.getUsername())) {
-            throw new UserAlreadyExistException("There is an account with that user name: " + customer.getUsername());
+            throw new UserAlreadyExistException("There is an account with that e-mail adress: " + customer.getEmail());
+        } else if (accountIdExist(customer.getAccountId())) {
+            throw new UserAlreadyExistException("There is an account with that account id: " + customer.getAccountId());
         }
         final Customer cust = new Customer();
 
+        cust.setAccountId(customer.getAccountId());
         cust.setUsername(customer.getUsername());
         cust.setPassword(passwordEncoder.encode(customer.getPassword()));
         cust.setEmail(customer.getEmail());
@@ -51,7 +52,7 @@ public class CustomerService {
     }
 	
 	public Customer login(final Customer customer) {
-        List<Customer> resultList = repository.findCustomerByEmailorUsername(customer.getEmail());
+        List<Customer> resultList = repository.findCustomerByEmailOrAccountId(customer.getEmail());
         if (resultList.isEmpty()) {
         	throw new UserNotFoundException("There is not exists an account with that email adress: " + customer.getEmail());
         }
@@ -71,8 +72,8 @@ public class CustomerService {
         return repository.findCustomerByEmail(email).size() > 0;
     }
 	
-	public boolean usernameExist(final String username) {
-        return repository.findCustomerByUsername(username).size() > 0;
+	public boolean accountIdExist(final String username) {
+        return repository.findCustomerByAccountId(username).size() > 0;
     }
 	
 	public Customer getUser(String verificationToken){
