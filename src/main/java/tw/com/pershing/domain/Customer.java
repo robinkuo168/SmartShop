@@ -11,6 +11,8 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "tb_customer")
 public class Customer {
@@ -25,16 +27,20 @@ public class Customer {
 	private String email;
 	private String password;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern="yyyy-MM-dd", timezone="GMT+8")
 	private Date birthdate;
 	private byte age;
 	private String occupation;
 	private String marriage;
 	private byte numbersofchildren;
 	@Column(name="create_at")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
 	private Date createAt;
 	@Column(name="last_request_at")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
 	private Date lastRequestAt;
 	@Column(name="update_at")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
 	private Date updateAt;
 
 	public int getCustomerId() {

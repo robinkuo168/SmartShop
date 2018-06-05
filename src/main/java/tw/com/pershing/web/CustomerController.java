@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tw.com.pershing.domain.Customer;
+import tw.com.pershing.domain.VerificationToken;
 import tw.com.pershing.repository.CustomerRepo;
 import tw.com.pershing.service.CustomerService;
 
@@ -41,19 +42,19 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/registration")
-	public Customer registerCustomer(@RequestBody Customer customer) {
+	public VerificationToken registerCustomer(@RequestBody Customer customer) {
 		final Customer registCustomer = customerService.registerNewUserAccount(customer);
 		String token = UUID.randomUUID().toString();
-		customerService.createVerificationTokenForUser(registCustomer, token);
-		return registCustomer;
+		VerificationToken returnToken = customerService.createVerificationTokenForUser(registCustomer, token);
+		return returnToken;
 	}
 	
 	@RequestMapping(value = "/login")
-	public Customer login(@RequestBody Customer customer) {
-		final Customer registedCustomer = customerService.login(customer);
+	public VerificationToken login(@RequestBody Customer customer) {
+		final VerificationToken token = customerService.login(customer);
 //		String token = UUID.randomUUID().toString();
 //		customerService.createVerificationTokenForUser(registedCustomer, token);
-		return registedCustomer;
+		return token;
 	}
 
 	@RequestMapping(value = "/save2")

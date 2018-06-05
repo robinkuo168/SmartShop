@@ -48,24 +48,31 @@ public class CustomerService {
         cust.setCreateAt(new Date());
         cust.setLastRequestAt(new Date());
         cust.setUpdateAt(new Date());
-        return repository.saveUser(cust);
+        final Customer returnCustomer = repository.saveUser(cust);
+        
+        returnCustomer.setPassword(null);
+        return returnCustomer;
     }
 	
-	public Customer login(final Customer customer) {
+	public VerificationToken login(final Customer customer) {
         List<Customer> resultList = repository.findCustomerByEmailOrAccountId(customer.getEmail());
         if (resultList.isEmpty()) {
         	throw new UserNotFoundException("There is not exists an account with that email adress: " + customer.getEmail());
         }
         if (passwordEncoder.matches(customer.getPassword(), resultList.get(0).getPassword())) {
-        	return resultList.get(0);
+        	VerificationToken token = tokenRepository.findByCustomer(resultList.get(0));
+        	token.setCustomer(null);
+        	return token;
         } else {
         	throw new PasswordNotMatchException("Password is not match");
         }
     }
 	
-	public void createVerificationTokenForUser(final Customer customer, final String token) {
+	public VerificationToken createVerificationTokenForUser(final Customer customer, final String token) {
         final VerificationToken myToken = new VerificationToken(token, customer);
-        tokenRepository.save(myToken);
+        VerificationToken returnToken = tokenRepository.save(myToken);
+        returnToken.setCustomer(null);
+        return returnToken;
     }
 	
 	public boolean emailExist(final String email) {
