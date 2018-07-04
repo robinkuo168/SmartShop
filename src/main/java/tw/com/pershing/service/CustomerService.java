@@ -39,6 +39,8 @@ public class CustomerService {
         cust.setUsername(customer.getUsername());
         cust.setPassword(passwordEncoder.encode(customer.getPassword()));
         cust.setEmail(customer.getEmail());
+        cust.setIdNo(customer.getIdNo());
+        cust.setGender(customer.getGender());
         cust.setMobile(customer.getMobile());
         cust.setBirthdate(customer.getBirthdate());
         cust.setAge(customer.getAge());
