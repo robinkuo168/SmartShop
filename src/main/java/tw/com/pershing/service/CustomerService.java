@@ -1,13 +1,34 @@
 package tw.com.pershing.service;
 
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.bind.DatatypeConverter;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import tw.com.pershing.domain.Customer;
+import tw.com.pershing.domain.MemberRequest;
+import tw.com.pershing.domain.MemberResponse;
 import tw.com.pershing.domain.VerificationToken;
 import tw.com.pershing.repository.CustomerRepo;
 import tw.com.pershing.repository.VerificationTokenRepository;
@@ -17,6 +38,10 @@ import tw.com.pershing.web.error.UserNotFoundException;
 
 @Service
 public class CustomerService {
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static final String URL = "http://203.70.195.201:8090/MemberService.svc/Member/UserCheckExistByUID";
+	private static final String PLATFORM = "Expo1";
+	private static final String PLATFORM_KEY = "";
 	
 	@Autowired
 	CustomerRepo repository;
@@ -50,8 +75,12 @@ public class CustomerService {
         cust.setCreateAt(new Date());
         cust.setLastRequestAt(new Date());
         cust.setUpdateAt(new Date());
-        final Customer returnCustomer = repository.saveUser(cust);
         
+        MemberResponse isEslite = this.isEsliteCustomer(cust.getIdNo());
+        cust.setIsMember(Byte.valueOf(isEslite.getCode()));
+        cust.setCardNo(isEslite.getCardNo());
+        
+        final Customer returnCustomer = repository.saveUser(cust);
         returnCustomer.setPassword(null);
         return returnCustomer;
     }
@@ -91,5 +120,56 @@ public class CustomerService {
             return token.getCustomer();
         }
         return null;
+	}
+	
+	public MemberResponse isEsliteCustomer(final String idNo) {
+		Timestamp timestamp = new Timestamp(new Date().getTime());
+		String temp = PLATFORM + PLATFORM_KEY + timestamp.getTime() + idNo;
+		MessageDigest md;
+		byte[] digest = null;
+		try {
+			md = MessageDigest.getInstance("MD5");
+			md.update(temp.getBytes());
+			digest = md.digest();
+		} catch (NoSuchAlgorithmException e) {
+			logger.error(e.getMessage());
+		}
+		String accessKey = DatatypeConverter.printHexBinary(digest).toLowerCase();
+		
+		MemberRequest member = new MemberRequest();
+		member.setAccessKey(accessKey);
+		member.setPlatform(PLATFORM);
+		member.setTimestamp(String.valueOf(timestamp.getTime()));
+		member.setUid(idNo);
+		ObjectMapper mapper = new ObjectMapper();
+		String payload = null;
+		try {
+			payload = mapper.writeValueAsString(member);
+			logger.info("JSON CONVERT: {}", payload);
+		} catch (JsonProcessingException e) {
+			logger.error(e.getMessage());
+		}
+		StringEntity entity = new StringEntity(payload, ContentType.APPLICATION_JSON);
+		
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost request = new HttpPost(URL);
+		request.setHeader("Content-type", "application/json");
+		request.setEntity(entity);
+		
+		HttpResponse response;
+		MemberResponse[] resArr = null;
+		try {
+			response = httpClient.execute(request);
+			HttpEntity resEntity = response.getEntity();
+			String content = EntityUtils.toString(resEntity, "UTF-8");
+			resArr = mapper.readValue(content, MemberResponse[].class);
+			logger.info(String.valueOf(response.getStatusLine().getStatusCode()));
+			logger.info(content);
+			logger.info("IdNumber: [{}], CardNumber: [{}]", idNo, resArr[0].getCardNo());
+		} catch (IOException e) {
+			logger.error(e.getMessage());
+		}
+
+		return resArr[0];
 	}
 }

@@ -36,6 +36,8 @@ public class Customer {
 	private String occupation;
 	private String marriage;
 	private byte numbersofchildren;
+	private byte isMember;
+	private String cardNo;
 	@Column(name="create_at")
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
 	private Date createAt;
@@ -179,5 +181,21 @@ public class Customer {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public byte getIsMember() {
+		return isMember;
+	}
+
+	public void setIsMember(byte isMember) {
+		this.isMember = isMember;
+	}
+
+	public String getCardNo() {
+		return cardNo;
+	}
+
+	public void setCardNo(String cardNo) {
+		this.cardNo = cardNo;
 	}
 }
