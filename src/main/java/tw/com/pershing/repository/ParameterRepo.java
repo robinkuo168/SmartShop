@@ -18,7 +18,7 @@ public class ParameterRepo {
 	
 	public List<Parameter> findParameterByKind(String kind) {
 		TypedQuery<Parameter> query = emf.createEntityManager()
-				.createQuery("SELECT p FROM Parameter p where kind=:kind", Parameter.class)
+				.createQuery("SELECT p FROM Parameter p where kind=:kind order by p.code", Parameter.class)
 				.setParameter("kind", kind);
 		List<Parameter> parameterList = query.getResultList();
 		System.out.println("findParameterByKind length:" + parameterList.size());
