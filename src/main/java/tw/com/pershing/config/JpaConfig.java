@@ -27,7 +27,7 @@ public class JpaConfig {
 	public DataSource dataSource() {
 		DriverManagerDataSource ds = new DriverManagerDataSource();
 		ds.setDriverClassName("com.mysql.jdbc.Driver");
-		ds.setUrl("jdbc:mysql://localhost:3306/smartshop");
+		ds.setUrl("jdbc:mysql://localhost:3306/hayashi");
 		ds.setUsername("root");
 		ds.setPassword("mysql");
 		Properties properties = new Properties();
