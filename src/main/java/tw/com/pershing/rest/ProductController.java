@@ -1,4 +1,4 @@
-package tw.com.pershing.web;
+package tw.com.pershing.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

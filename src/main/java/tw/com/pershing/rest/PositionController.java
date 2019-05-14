@@ -1,4 +1,4 @@
-package tw.com.pershing.web;
+package tw.com.pershing.rest;
 
 import java.util.List;
 
@@ -9,29 +9,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import tw.com.pershing.domain.Guide;
-import tw.com.pershing.repository.GuideRepo;
-import tw.com.pershing.service.GuideService;
+import tw.com.pershing.domain.Position;
+import tw.com.pershing.repository.PositionRepo;
+import tw.com.pershing.service.PositionService;
 
 @RestController
-@RequestMapping("/guide")
-public class GuideController {
+@RequestMapping("/position")
+public class PositionController {
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
-	GuideRepo guideMananger;
+	PositionRepo positionMananger;
 	
 	@Autowired
-	GuideService guideService;
+	PositionService positionService;
 	
 
 	@RequestMapping(value = "/findById")
-	public List<Guide> findGuideById(@RequestParam(value = "id") String guideId) {
-		return guideService.getGuideListById(guideId);
+	public List<Position> findPositionById(@RequestParam(value = "id") String positionId) {
+		return positionService.getPositionListById(positionId);
 	}
 
 	@RequestMapping(value = "/list")
-	public List<Guide> getGuideList() {
-		return guideService.getGuideList();
+	public List<Position> getPositionList() {
+		return positionService.getPositionList();
 	}
 }

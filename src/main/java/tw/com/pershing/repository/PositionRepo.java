@@ -2,12 +2,15 @@ package tw.com.pershing.repository;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import tw.com.pershing.domain.Position;
 
@@ -32,6 +35,20 @@ public class PositionRepo {
 		List<Position> list = query.getResultList();
 		System.out.println("findPositionById length:" + list.size());
 		return list;
+	}
+		
+	public Position savePosition(Position position) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+//		if (!em.contains(position)) {
+//			em.persist(position);
+//		} else {
+			em.merge(position);
+//		}
+		et.commit();
+		em.close();
+		return position;
 	}
 
 	public static void main(String[] args) {

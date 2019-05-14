@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @ComponentScan(basePackages = {
 		"tw.com.pershing.config", 
 		"tw.com.pershing.web", 
-		"tw.com.pershing.controller",
+		"tw.com.pershing.rest", 
 		"tw.com.pershing.repository",
 		"tw.com.pershing.service"
 		})
