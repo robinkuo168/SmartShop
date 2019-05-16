@@ -39,12 +39,28 @@ public class PositionService {
         pst.setBrand(position.getBrand());
         pst.setDistrict(position.getDistrict());
         pst.setBlock(position.getBlock());
+        pst.setBrandEqual(position.getBrandEqual());
+        pst.setDistrictEqual(position.getDistrictEqual());
+        pst.setBlockEqual(position.getBlockEqual());
         
         if (positionIdExist(position.getPositionId())) {
         	pst.setPositionId(position.getPositionId());
         }
         
         final Position returnPosition = repository.savePosition(pst);
+        return returnPosition;
+    }
+	
+	public Position deletePosition(final Position position) {
+        final Position pst = new Position();
+        
+        pst.setBrand(position.getBrand());
+        
+        if (positionIdExist(position.getPositionId())) {
+        	pst.setPositionId(position.getPositionId());
+        }
+        
+        final Position returnPosition = repository.deletePosition(pst);
         return returnPosition;
     }
 }

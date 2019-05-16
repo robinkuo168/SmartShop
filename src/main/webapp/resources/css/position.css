@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+.col-hidden, .dlg_hidden {
+	display: none;
+}
+table.result-table tr.selected {
+    background-color: #62E0E9 !important;
+    color:#fff;
+    vertical-align: middle;
+    padding: 1.5em;
+}

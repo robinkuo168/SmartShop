@@ -3,5 +3,5 @@
 <!-- js_lib begin -->
 <script type="text/javascript" src="webjars/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="webjars/jquery-ui/1.12.1/jquery-ui.js"></script>
-<!-- <script type="text/javascript" src="/javascripts/page/common.js"></script> -->
+<script type="text/javascript" src="resources/js/common.js"></script>
 <!-- js_lib end -->

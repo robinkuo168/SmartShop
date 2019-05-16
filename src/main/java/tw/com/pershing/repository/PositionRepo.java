@@ -12,6 +12,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import tw.com.pershing.domain.Customer;
 import tw.com.pershing.domain.Position;
 
 @Repository
@@ -46,6 +47,17 @@ public class PositionRepo {
 //		} else {
 			em.merge(position);
 //		}
+		et.commit();
+		em.close();
+		return position;
+	}
+	
+	public Position deletePosition(Position position) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		em.createQuery("DELETE FROM Position u where positionId=:id")
+				.setParameter("id", position.getPositionId()).executeUpdate();
 		et.commit();
 		em.close();
 		return position;
