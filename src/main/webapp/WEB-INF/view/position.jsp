@@ -23,9 +23,11 @@
 							<tr>
 								<th class="col-hidden">代碼</th>
 								<th>序號</th>
+								<th>樓層</th>
 								<th>品牌</th>
 								<th>區塊</th>
 								<th>櫃位</th>
+								<th>樓層(查找用)</th>
 								<th>品牌(查找用)</th>
 								<th>區塊(查找用)</th>
 								<th>櫃位(查找用)</th>
@@ -35,9 +37,11 @@
 					        <tr>
 					            <td class="id col-hidden">${position.positionId}</td>
 					            <td>${loop.index+1}</td>
+					            <td class="floor">${position.floor}</td>
 					            <td class="brand">${position.brand}</td>
 					            <td class="district">${position.district}</td>
 					            <td class="block">${position.block}</td>
+					            <td class="floorEqual">${position.floorEqual}</td>
 					            <td class="brandEqual">${position.brandEqual}</td>
 					            <td class="districtEqual">${position.districtEqual}</td>
 					            <td class="blockEqual">${position.blockEqual}</td>
@@ -64,6 +68,11 @@
 			<div class="form-wrap">
 				<input type="hidden" name="id">
 				<div class="form-row">
+					<label for="edt_floor">樓層
+						<input type="text" name="floor" id="edt_floor">
+					</label>
+				</div>
+				<div class="form-row">
 					<label for="edt_brand">品牌
 						<input type="text" name="brand" id="edt_brand">
 					</label>
@@ -76,6 +85,11 @@
 				<div class="form-row">
 					<label for="edt_block">櫃位
 						<input type="text" name="block" id="edt_block">
+					</label>
+				</div>
+				<div class="form-row">
+					<label for="edt_floorEqual">品牌(查找用)
+						<input type="text" name="floorEqual" id="edt_floorEqual">
 					</label>
 				</div>
 				<div class="form-row">

@@ -20,9 +20,11 @@ public class Position {
 	private String district;
 	private String block;
 	private String brand;
+	private String floor;
 	private String brandEqual;
 	private String districtEqual;
 	private String blockEqual;
+	private String floorEqual;
 	
 	public int getPositionId() {
 		return positionId;
@@ -65,5 +67,17 @@ public class Position {
 	}
 	public void setBlockEqual(String blockEqual) {
 		this.blockEqual = blockEqual;
+	}
+	public String getFloor() {
+		return floor;
+	}
+	public void setFloor(String floor) {
+		this.floor = floor;
+	}
+	public String getFloorEqual() {
+		return floorEqual;
+	}
+	public void setFloorEqual(String floorEqual) {
+		this.floorEqual = floorEqual;
 	}
 }

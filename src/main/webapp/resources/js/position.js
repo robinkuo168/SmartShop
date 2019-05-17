@@ -3,6 +3,8 @@
  */
 $('#btn_ins').click(function(e) {
 	e.preventDefault();
+	var position = set_position("", "", "", "", "", "", "", "", "");
+	data_to_dialog('#dlg_edit', position);
 	openEditDialog('ins');
 //	$('#dlg_edit').dialog({
 //	    title: "新增資料",
@@ -33,14 +35,16 @@ $('body').on('click', '[id^="btn_edt"]', function(e) {
 	$('.selected').removeClass('selected');
     $(row).addClass("selected");
     var id = $('.id', row).html(),
+    	floor =$('.floor', row).html(),
 	    brand =$('.brand', row).html(),
 	    district =$('.district', row).html(),
 	    block =$('.block', row).html(),
+	    floorE =$('.floorEqual', row).html(),
 	    brandE =$('.brandEqual', row).html(),
 	    districtE =$('.districtEqual', row).html(),
 	    blockE =$('.blockEqual', row).html();
     
-    var position = set_position(id, brand, district, block, brandE, districtE, blockE);
+    var position = set_position(id, brand, floor, district, block, brandE, floorE, districtE, blockE);
     
     console.log(position);
 	data_to_dialog('#dlg_edit', position);
@@ -138,12 +142,14 @@ function openEditDialog(type) {
 	});
 }
 
-function set_position(id, brand, district, block, brandE, districtE, blockE) {
+function set_position(id, brand, floor, district, block, brandE, floorE, districtE, blockE) {
 	return data = {
 		id: id,
+		floor: floor,
 		brand: brand,
 		district: district,
 		block: block,
+		floorEqual: floorE,
 		brandEqual: brandE,
 		districtEqual: districtE,
 		blockEqual: blockE
