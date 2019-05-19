@@ -64,7 +64,7 @@ public class CustomerService {
         cust.setUsername(customer.getUsername());
         cust.setPassword(passwordEncoder.encode(customer.getPassword()));
         cust.setEmail(customer.getEmail());
-        cust.setIdNo(customer.getIdNo());
+//        cust.setIdNo(customer.getIdNo());
         cust.setGender(customer.getGender());
         cust.setMobile(customer.getMobile());
         cust.setBirthdate(customer.getBirthdate());
@@ -76,9 +76,9 @@ public class CustomerService {
         cust.setLastRequestAt(new Date());
         cust.setUpdateAt(new Date());
         
-        MemberResponse isEslite = this.isEsliteCustomer(cust.getIdNo());
-        cust.setIsMember(Byte.valueOf(isEslite.getCode()));
-        cust.setCardNo(isEslite.getCardNo());
+//        MemberResponse isEslite = this.isEsliteCustomer(cust.getIdNo());
+//        cust.setIsMember(Byte.valueOf(isEslite.getCode()));
+//        cust.setCardNo(isEslite.getCardNo());
         
         final Customer returnCustomer = repository.saveUser(cust);
         returnCustomer.setPassword(null);

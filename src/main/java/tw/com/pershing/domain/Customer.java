@@ -26,8 +26,8 @@ public class Customer {
 	private String mobile;
 	private String email;
 	private String password;
-	@Column(name="id_no")
-	private String idNo;
+//	@Column(name="id_no")
+//	private String idNo;
 	private String gender;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern="yyyy-MM-dd", timezone="GMT+8")
@@ -167,13 +167,13 @@ public class Customer {
 		this.accountId = accountId;
 	}
 
-	public String getIdNo() {
-		return idNo;
-	}
-
-	public void setIdNo(String idNo) {
-		this.idNo = idNo;
-	}
+//	public String getIdNo() {
+//		return idNo;
+//	}
+//
+//	public void setIdNo(String idNo) {
+//		this.idNo = idNo;
+//	}
 
 	public String getGender() {
 		return gender;
