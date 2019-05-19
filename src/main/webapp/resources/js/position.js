@@ -39,12 +39,14 @@ $('body').on('click', '[id^="btn_edt"]', function(e) {
 	    brand =$('.brand', row).html(),
 	    district =$('.district', row).html(),
 	    block =$('.block', row).html(),
+	    productName =$('.productName', row).html(),
+	    shopUrl =$('.shopUrl', row).html(),
 	    floorE =$('.floorEqual', row).html(),
 	    brandE =$('.brandEqual', row).html(),
 	    districtE =$('.districtEqual', row).html(),
 	    blockE =$('.blockEqual', row).html();
     
-    var position = set_position(id, brand, floor, district, block, brandE, floorE, districtE, blockE);
+    var position = set_position(id, brand, floor, productName, shopUrl, district, block, brandE, floorE, districtE, blockE);
     
     console.log(position);
 	data_to_dialog('#dlg_edit', position);
@@ -142,13 +144,15 @@ function openEditDialog(type) {
 	});
 }
 
-function set_position(id, brand, floor, district, block, brandE, floorE, districtE, blockE) {
+function set_position(id, brand, floor, productName, shopUrl, district, block, brandE, floorE, districtE, blockE) {
 	return data = {
 		id: id,
 		floor: floor,
 		brand: brand,
 		district: district,
 		block: block,
+		productName: productName,
+		shopUrl: shopUrl,
 		floorEqual: floorE,
 		brandEqual: brandE,
 		districtEqual: districtE,

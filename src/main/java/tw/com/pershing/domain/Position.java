@@ -21,6 +21,8 @@ public class Position {
 	private String block;
 	private String brand;
 	private String floor;
+	private String productName;
+	private String shopUrl;
 	private String brandEqual;
 	private String districtEqual;
 	private String blockEqual;
@@ -79,5 +81,17 @@ public class Position {
 	}
 	public void setFloorEqual(String floorEqual) {
 		this.floorEqual = floorEqual;
+	}
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public String getShopUrl() {
+		return shopUrl;
+	}
+	public void setShopUrl(String shopUrl) {
+		this.shopUrl = shopUrl;
 	}
 }

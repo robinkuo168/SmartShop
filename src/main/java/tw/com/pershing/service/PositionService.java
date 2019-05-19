@@ -40,6 +40,8 @@ public class PositionService {
         pst.setBrand(position.getBrand());
         pst.setDistrict(position.getDistrict());
         pst.setBlock(position.getBlock());
+        pst.setProductName(position.getProductName());
+        pst.setShopUrl(position.getShopUrl());
         pst.setFloorEqual(position.getFloorEqual());
         pst.setBrandEqual(position.getBrandEqual());
         pst.setDistrictEqual(position.getDistrictEqual());
