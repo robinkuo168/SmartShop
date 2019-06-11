@@ -3,29 +3,9 @@
  */
 $('#btn_ins').click(function(e) {
 	e.preventDefault();
-	var position = set_position("", "", "", "", "", "", "", "", "");
+	var position = set_position("", "", "", "", "", "", "", "", "", "", "", "");
 	data_to_dialog('#dlg_edit', position);
 	openEditDialog('ins');
-//	$('#dlg_edit').dialog({
-//	    title: "新增資料",
-//	    modal: true,
-//	    width: 400,
-//	    open: function(event, ui) {
-//	        $(this).parent().children().children('.ui-dialog-titlebar-close').hide();
-//	    },
-//	    buttons: [{
-//	    	text: "確認新增",
-//	    	click: function() {
-//	            btn_edit_click(()=>{$(this).dialog("close");});
-//	        }
-//	    }, {
-//	        text: "取消",
-//	        click: function() {
-//	        	$('.selected').removeClass('selected');
-//	            $(this).dialog("close");
-//	        }
-//	    }]
-//	});
 })
 
 $('body').on('click', '[id^="btn_edt"]', function(e) {
@@ -41,36 +21,16 @@ $('body').on('click', '[id^="btn_edt"]', function(e) {
 	    block =$('.block', row).html(),
 	    productName =$('.productName', row).html(),
 	    shopUrl =$('.shopUrl', row).html(),
+	    seq =$('.seq', row).html(),
 	    floorE =$('.floorEqual', row).html(),
 	    brandE =$('.brandEqual', row).html(),
 	    districtE =$('.districtEqual', row).html(),
 	    blockE =$('.blockEqual', row).html();
     
-    var position = set_position(id, brand, floor, productName, shopUrl, district, block, brandE, floorE, districtE, blockE);
+    var position = set_position(id, brand, floor, productName, shopUrl, seq, district, block, brandE, floorE, districtE, blockE);
     
-    console.log(position);
 	data_to_dialog('#dlg_edit', position);
 	openEditDialog('edt');
-//    $('#dlg_edit').dialog({
-//	    title: "更新資料",
-//	    modal: true,
-//	    width: 400,
-//	    open: function(event, ui) {
-//	        $(this).parent().children().children('.ui-dialog-titlebar-close').hide();
-//	    },
-//	    buttons: [{
-//	    	text: "確認修改",
-//	    	click: function() {
-//	            btn_edit_click(()=>{$(this).dialog("close");});
-//	        }
-//	    }, {
-//	        text: "取消",
-//	        click: function() {
-//	        	$('.selected').removeClass('selected');
-//	            $(this).dialog("close");
-//	        }
-//	    }]
-//	});
 });
 
 $('body').on('click', '[id^="btn_del"]', function(e) {
@@ -84,7 +44,6 @@ $('body').on('click', '[id^="btn_del"]', function(e) {
     
     var position = set_position(id, brand);
     
-    console.log(position);
     data_to_dialog('#dlg_delete', position);
 	
     $('#dlg_delete > div.content').html(`是否刪除此筆資料，品牌：${position.brand}?`);
@@ -144,7 +103,7 @@ function openEditDialog(type) {
 	});
 }
 
-function set_position(id, brand, floor, productName, shopUrl, district, block, brandE, floorE, districtE, blockE) {
+function set_position(id, brand, floor, productName, shopUrl, seq, district, block, brandE, floorE, districtE, blockE) {
 	return data = {
 		id: id,
 		floor: floor,
@@ -153,6 +112,7 @@ function set_position(id, brand, floor, productName, shopUrl, district, block, b
 		block: block,
 		productName: productName,
 		shopUrl: shopUrl,
+		seq: seq,
 		floorEqual: floorE,
 		brandEqual: brandE,
 		districtEqual: districtE,
@@ -187,7 +147,6 @@ function sync_to_table(position) {
 
 function btn_edit_click(cb){
 	var position = data_from_dialog('#dlg_edit');
-	console.log(position);
 	
 	if( position.brand == "" ){
 		message("請輸入品牌");
@@ -200,7 +159,6 @@ function btn_edit_click(cb){
 		    contentType: 'application/json',
 		    success: function(response) {
 		        let res = JSON.parse(response);
-		        console.log(res);
 		        sync_to_table(res);
 				message(`更新成功: ${res.brand}`);
 				cb();
@@ -211,7 +169,6 @@ function btn_edit_click(cb){
 
 function btn_delete_click(cb){
 	var position = data_from_dialog('#dlg_delete');
-	console.log(position);
 	
 	if( position.brand == "" ){
 		message("請輸入品牌");
@@ -224,7 +181,6 @@ function btn_delete_click(cb){
 		    contentType: 'application/json',
 		    success: function(response) {
 		        let res = JSON.parse(response);
-		        console.log(res);
 				message(`刪除成功: ${res.brand}`);
 				$('tr.selected').remove();
 				cb();

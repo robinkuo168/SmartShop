@@ -1,6 +1,5 @@
 package tw.com.pershing.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,11 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tw.com.pershing.domain.Customer;
-import tw.com.pershing.domain.MemberResponse;
 import tw.com.pershing.domain.Position;
 import tw.com.pershing.repository.PositionRepo;
-import tw.com.pershing.web.error.UserAlreadyExistException;
 
 @Service
 public class PositionService {
@@ -42,6 +38,7 @@ public class PositionService {
         pst.setBlock(position.getBlock());
         pst.setProductName(position.getProductName());
         pst.setShopUrl(position.getShopUrl());
+        pst.setSeq(position.getSeq());
         pst.setFloorEqual(position.getFloorEqual());
         pst.setBrandEqual(position.getBrandEqual());
         pst.setDistrictEqual(position.getDistrictEqual());

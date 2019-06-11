@@ -29,6 +29,7 @@
 								<th>櫃位</th>
 								<th>商品名稱</th>
 								<th>線上商城連結</th>
+								<th>優先次序</th>
 								<th>樓層(查找用)</th>
 								<th>品牌(查找用)</th>
 								<th>區塊(查找用)</th>
@@ -45,6 +46,7 @@
 					            <td class="block">${position.block}</td>
 					            <td class="productName">${position.productName}</td>
 					            <td class="shopUrl">${position.shopUrl}</td>
+					            <td class="seq">${position.seq}</td>
 					            <td class="floorEqual">${position.floorEqual}</td>
 					            <td class="brandEqual">${position.brandEqual}</td>
 					            <td class="districtEqual">${position.districtEqual}</td>
@@ -99,6 +101,11 @@
 				<div class="form-row">
 					<label for="edt_shop_url">線上商城連結
 						<input type="text" name="shopUrl" id="edt_shop_url">
+					</label>
+				</div>
+				<div class="form-row">
+					<label for="edt_seq">優先次序
+						<input type="text" name="seq" id="edt_seq">
 					</label>
 				</div>
 				<div class="form-row">

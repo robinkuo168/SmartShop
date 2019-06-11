@@ -23,6 +23,7 @@ public class Position {
 	private String floor;
 	private String productName;
 	private String shopUrl;
+	private int seq;
 	private String brandEqual;
 	private String districtEqual;
 	private String blockEqual;
@@ -93,5 +94,11 @@ public class Position {
 	}
 	public void setShopUrl(String shopUrl) {
 		this.shopUrl = shopUrl;
+	}
+	public int getSeq() {
+		return seq;
+	}
+	public void setSeq(int seq) {
+		this.seq = seq;
 	}
 }
