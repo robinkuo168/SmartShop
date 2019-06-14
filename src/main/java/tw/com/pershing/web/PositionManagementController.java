@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -41,7 +40,7 @@ public class PositionManagementController {
     	return "position";
     }
     
-    @PostMapping("/update")
+    @PostMapping("/position/update")
     @ResponseBody
     public Position updatePosition(@RequestBody Position position) {
     	LOGGER.debug("post update");
@@ -49,7 +48,7 @@ public class PositionManagementController {
         return result;
     }
     
-    @PostMapping("/delete")
+    @PostMapping("/position/delete")
     @ResponseBody
     public Position deletePosition(@RequestBody Position position) {
     	LOGGER.debug("post delete");

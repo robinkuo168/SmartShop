@@ -152,7 +152,7 @@ function btn_edit_click(cb){
 		message("請輸入品牌");
 	} else {
 		$.ajax({
-		    url: 'update',
+		    url: 'position/update',
 		    method: 'POST',
 		    dataType: 'text',
 		    data: JSON.stringify(position),
@@ -174,7 +174,7 @@ function btn_delete_click(cb){
 		message("請輸入品牌");
 	} else {
 		$.ajax({
-		    url: 'delete',
+		    url: 'position/delete',
 		    method: 'POST',
 		    dataType: 'text',
 		    data: JSON.stringify(position),
