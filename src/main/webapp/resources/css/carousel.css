@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+img.carousel {
+	width: 50px;
+}
+/* img.carousel:hover { */
+/* 	width: 250px; */
+/* } */
+.zoom-in {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 60%;
+    -webkit-transform: scale(10);
+}
